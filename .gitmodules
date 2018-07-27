@@ -1,3 +1,4 @@
 [submodule "aima"]
 	path = aima
 	url = https://github.com/aimacode/aima-python
+  ignore = dirty
