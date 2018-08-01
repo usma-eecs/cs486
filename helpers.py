@@ -1,14 +1,32 @@
+# importing helpers adds aima to the import path search and
+# sets up matplotlib
+import os, sys
+
+# since aima is not distributed as a package, this hack
+# is necessary to add it to Python's import search path
+sys.path.append(os.path.join(os.getcwd(),'aima'))
+
+# Hide warnings in the matplotlib sections
+import warnings
+warnings.filterwarnings("ignore")
+
 def counter(func):
     """
     A decorator that keeps track of how many times a function is called
     """
+    def wrapper(self,*args,**kw_args):
+        # all this self nonsense to make it act like the counter is
+        # attached to the instance, not the class
+        if (not hasattr(wrapper,'self') or self != wrapper.self):
+            wrapper.count = 0
+        
+        wrapper.count += 1
+        wrapper.self = self
+        
+        return func(self,*args,**kw_args)
     
-    def wrapped(*args, **kwargs):
-        wrapped.calls += 1
-        return func(*args, **kwargs)
-
-    wrapped.calls = 0
-    return wrapped
+    wrapper.count = 0
+    return wrapper
 
 ##
 # Edge Matching Helpers
