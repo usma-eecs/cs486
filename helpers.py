@@ -237,7 +237,6 @@ def nim_minimax_tree(initial, max_move, depth=10):
     nx.draw_networkx_edge_labels(G, pos, edge_labels)
 
     for shape, nodelist in node_shapes.items():
-        print(shape, nodelist)
         labels = {node: node_labels[node] for node in nodelist}
         nx.draw(G, pos, labels=labels, nodelist=nodelist, node_shape=shape,
                 node_color='w', edgecolors='black', node_size=1500)
