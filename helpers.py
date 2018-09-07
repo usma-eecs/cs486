@@ -165,7 +165,7 @@ for name_1, coordinates_1 in romania.locations.items():
             [coordinates_1[0] - coordinates_2[0], coordinates_1[1] - coordinates_2[1]])
 
 
-def nim_minimax_tree(initial, max_move, depth=10):
+def nim_decision_tree(objects, moves, depth=10):
     # for drawing trees in networkx, which we need for minimax
     def tree_layout(G, root, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5,
                     pos=None, parent=None):
@@ -188,11 +188,11 @@ def nim_minimax_tree(initial, max_move, depth=10):
         return pos
             
     i = 1
-    b = max_move  # branching factor
+    b = moves  # branching factor
 
     edges = []
     edge_labels = {}
-    node_labels = {0: initial}
+    node_labels = {0: objects}
     node_shapes = {"s": set([]), "v": set([]), "^": set([0])}
     should_continue = True
     
@@ -228,10 +228,10 @@ def nim_minimax_tree(initial, max_move, depth=10):
 
     import networkx as nx
     import matplotlib.pyplot as plt
-    plt.rcParams['figure.figsize'] = [12, 8]
+    plt.rcParams['figure.figsize'] = [16, 8]
 
     G = nx.Graph()
-    G.add_edges_from(edges)
+    G.add_edges_from(reversed(edges))
     pos = tree_layout(G, 0)
 
     nx.draw_networkx_edge_labels(G, pos, edge_labels)
