@@ -192,7 +192,9 @@ def nim_decision_tree(objects, moves, depth=10):
 
     edges = []
     edge_labels = {}
-    node_labels = {0: objects}
+    node_labels = {}
+    max_utilities = {0: 0}
+    min_utilities = {0: 0}
     node_shapes = {"s": set([]), "v": set([]), "^": set([0])}
     should_continue = True
     
@@ -208,16 +210,28 @@ def nim_decision_tree(objects, moves, depth=10):
             edge = (parent, child)
             edge_label = child % (b) + 1
             
-            if parent in node_labels:
-                node_label = node_labels[parent] - edge_label
+            if parent in max_utilities:
+                if d % 2 == 0:
+                    min_utility = min_utilities[parent]
+                    max_utility = max_utilities[parent] + edge_label
+                else:
+                    min_utility = min_utilities[parent] + edge_label
+                    max_utility = max_utilities[parent]
+                    
 
-                if node_label >= 0:
+                if max_utility + min_utility <= objects:
                     should_continue = True
                     edges.append(edge)
                     edge_labels[edge] = edge_label
-                    node_labels[child] = node_label
+                    max_utilities[child] = max_utility
+                    min_utilities[child] = min_utility
 
-                    if node_label == 0:
+                    if max_utility + min_utility == objects:
+                        if d % 2 == 0:
+                            node_labels[child] = max_utility
+                        else:
+                            node_labels[child] = -min_utility
+                            
                         node_shapes["s"].add(child)
                     elif d % 2 == 0:
                         node_shapes["^"].add(child)
@@ -237,8 +251,7 @@ def nim_decision_tree(objects, moves, depth=10):
     nx.draw_networkx_edge_labels(G, pos, edge_labels)
 
     for shape, nodelist in node_shapes.items():
-        labels = {node: node_labels[node] for node in nodelist}
-        nx.draw(G, pos, labels=labels, nodelist=nodelist, node_shape=shape,
+        nx.draw(G, pos, labels=node_labels, nodelist=nodelist, node_shape=shape,
                 node_color='w', edgecolors='black', node_size=1500)
     
     plt.show()
