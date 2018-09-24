@@ -167,8 +167,7 @@ for name_1, coordinates_1 in romania.locations.items():
 
 def nim_decision_tree(objects, moves, depth=10):
     # for drawing trees in networkx, which we need for minimax
-    def tree_layout(G, root, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5,
-                    pos=None, parent=None):
+    def tree_layout(G, root, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5,pos=None, parent=None):
         if pos == None:
             pos = {root: (xcenter, vert_loc)}
         else:
