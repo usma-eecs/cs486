@@ -254,3 +254,37 @@ def nim_decision_tree(objects, moves, depth=10):
                 node_color='w', edgecolors='black', node_size=1500)
     
     plt.show()
+
+from aima.mdp import MDP
+    
+class HiLo(MDP):
+    def __init__(self):
+        
+        rewards = {"bet": -1, "win": 1, "lose": -1}
+        actions = {"win": ["draw"],"lose":["exit"],"bet":["draw"]}
+        transitions = {"win": {"draw": []}, "lose": {"exit": []},"bet":{"draw":[]}}
+
+        for card in range(1,14):
+            rewards[card] = 0
+            actions[card] = ["higher","lower"]
+
+            transitions["win"]["draw"].append([1/13,card])
+            transitions["bet"]["draw"].append([1/13,card]) 
+
+            transitions[card] = {
+                "higher": [[(13-card)/13,"win"], [(card-1)/13,"lose"]],
+                "lower":  [[(13-card)/13,"lose"], [(card-1)/13,"win"]]
+            }        
+        
+        MDP.__init__(
+            self,
+            init="start", 
+            actlist=actions,
+            terminals=["lose"], 
+            transitions=transitions, 
+            reward=rewards, 
+            states=None, 
+            gamma=1)
+
+    def actions(self,state):
+        return self.actlist[state]
