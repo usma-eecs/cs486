@@ -278,7 +278,7 @@ class HiLo(MDP):
         
         MDP.__init__(
             self,
-            init="start", 
+            init="bet", 
             actlist=actions,
             terminals=["lose"], 
             transitions=transitions, 
