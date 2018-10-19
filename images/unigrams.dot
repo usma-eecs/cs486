@@ -1,10 +1,11 @@
 digraph G {
   rankdir="LR";
-  I -> am [label="0.5"];
+  I -> am [label="0.6"];
   am -> Sam [label="0.5"];
-  Sam -> I [label="1.0"];
+  Sam -> I [label="0.5"];
+  Sam -> Sam [label="0.5"];
   am -> I [label="0.5"];
-  I -> do [label="0.5"];
+  I -> do [label="0.3"];
   do -> "not" [label="1.0"];
   not -> "..." [label="1.0"];
 }
