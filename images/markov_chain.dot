@@ -1,8 +1,8 @@
 digraph G {
   rankdir="LR";
-  X_1 [texlbl="$X_{1}$"];
-  X_2 [texlbl="$X_{2}$"];
-  X_3 [texlbl="$X_{...}$"];
-  X_4 [texlbl="$X_{\infty}$"];
+  X_1 [label=< X<sub><font point-size="9">1</font></sub> >];
+  X_2 [label=< X<sub><font point-size="9">2</font></sub> >];
+  X_3 [label=< X<sub><font point-size="9">3</font></sub> >];
+  X_4 [label=< X<sub><font point-size="9">4</font></sub> >];
   X_1-> X_2 -> X_3 -> X_4;
 }
