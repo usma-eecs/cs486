@@ -295,8 +295,6 @@ query = aima.probability.enumeration_ask
 
 # for variable elimination
 aima.probability.Factor.__str__ = dict.__str__
+aima.probability.Factor.__repr__ = dict.__repr__
 aima.probability.ProbDist.__str__ = aima.probability.ProbDist.show_approx
-
-formatter = get_ipython().display_formatter.formatters['text/plain']
-formatter.for_type(aima.probability.Factor, lambda x,p,c: formatter.for_type(dict)(x.cpt,p,c))
-formatter.for_type(aima.probability.ProbDist, lambda x,p,c: formatter.for_type(dict)(x.show_approx(),p,c))
+aima.probability.ProbDist.__repr__ = aima.probability.ProbDist.show_approx
