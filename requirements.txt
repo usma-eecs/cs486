@@ -1,3 +1,5 @@
 matplotlib
 networkx
 Pillow
+scikit-learn
+pydotplus
