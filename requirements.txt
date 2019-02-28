@@ -3,3 +3,4 @@ networkx
 Pillow
 scikit-learn
 pydotplus
+pandas
