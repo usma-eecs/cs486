@@ -7,6 +7,13 @@ This repository uses submodules, to clone use:
 $ git clone --recurse-submodules https://github.com/usma-eecs/cs486.git 
 ```
 
+If you forget to do that (or are reading this too late) you can fix it by running the following commands from the repo's root directory:
+
+```bash
+$ git submodule init
+$ git submodule update
+```
+
 When updating, make sure your pull includes submodules:
 
 ```bash
